@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TASKS - EXCODERS ELITE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box} body{background:#f5f5f7;color:#111;font-family:Arial;padding:18px;max-width:600px;margin:0 auto}
+.warn{background:#111;color:white;padding:11px;border-radius:10px;font-size:10px;font-weight:800;text-align:center;margin-bottom:14px}
+.head{display:flex;justify-content:space-between;align-items:center;margin:10px 0 16px 0}
+.streak{background:white;border-radius:22px;padding:18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,0.06);border:1px solid #eee}
+.streak h2{font-size:34px} .streak p{font-size:11px;color:#666}
+.cal{display:flex;gap:7px;margin:16px 0} .d{flex:1;background:white;border:1px solid #eee;border-radius:12px;padding:10px 0;text-align:center;font-size:10px;font-weight:800;color:#999} .d.on{background:#111;color:white} .d.done{background:#7c3aed;color:white;border-color:#7c3aed}
+.bar{height:8px;background:#e5e5e5;border-radius:20px;overflow:hidden;margin:10px 0} .fill{height:100%;background:#7c3aed;width:0%;transition:0.5s}
+.task{background:white;border:1px solid #eee;border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px} .task.ok{border-color:#22c55e;background:#f0fdf4}
+.task b{font-size:13px} .task i{font-size:11px;color:#777;font-style:normal;display:block;margin-top:2px}
+.task button{padding:9px 16px;border:none;border-radius:10px;font-weight:800;font-size:11px;cursor:pointer;background:#111;color:white} .task.ok button{background:#22c55e}
+</style>
+</head>
+<body>
+<div class="warn">⚠️ OFFICIAL: 09113257933 ONLY - No agent will ever ask you for money in DM. That's SCAM!</div>
+<div class="head"><h3>DAILY MISSIONS</h3><span id="date" style="font-size:11px;color:#888"></span></div>
+
+<div class="streak"><div><h2 id="stk">🔥 1 Day</h2><p>Keep your streak alive!</p></div><div style="text-align:right"><div style="font-size:24px">⚡</div><p id="pts" style="font-weight:900">0 pts</p></div></div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+
+<div class="cal"><div class="d" id="d0">SUN</div><div class="d" id="d1">MON</div><div class="d" id="d2">TUE</div><div class="d" id="d3">WED</div><div class="d" id="d4">THU</div><div class="d" id="d5">FRI</div><div class="d" id="d6">SAT</div></div>
+
+<div class="task" id="t1"><div><b>✅ Daily Check-in</b><i>+10 points</i></div><button onclick="doIt('t1',10)">CLAIM</button></div>
+<div class="task" id="t2"><div><b>💻 Submit Task</b><i>+50 points - Upload today's work</i></div><button onclick="doIt('t2',50)">DO IT</button></div>
+<div class="task" id="t3"><div><b>👀 Review Others</b><i>+30 points - Review 2 people</i></div><button onclick="doIt('t3',30)">DO IT</button></div>
+<div class="task" id="t4"><div><b>📢 Share Progress</b><i>+20 points - Share on WhatsApp Status</i></div><button onclick="doIt('t4',20)">DO IT</button></div>
+
+<div style="text-align:center;margin-top:30px;color:#aaa;font-size:10px">EXCODERS ELITE • Support: 09113257933 via WhatsApp Only</div>
+
+<script>
+let pts=parseInt(localStorage.getItem('pts')||0); let streak=localStorage.getItem('stk')||1;
+document.getElementById('pts').innerText=pts+' pts'; document.getElementById('stk').innerText='🔥 '+streak+' Day';
+document.getElementById('date').innerText=new Date().toDateString(); document.getElementById('d'+new Date().getDay()).classList.add('on');
+function doIt(id,p){document.getElementById(id).classList.add('ok');document.getElementById(id).querySelector('button').innerText='DONE ✓'; pts+=p; localStorage.setItem('pts',pts); document.getElementById('pts').innerText=pts+' pts'; upd()}
+function upd(){let d=document.querySelectorAll('.task.ok').length; document.getElementById('fill').style.width=(d/4*100)+'%'; if(d==4){alert('🎉 All tasks done! Come back tomorrow to keep streak!');}}
+</script>
+</body>
+</html>

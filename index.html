@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXCODERS ELITE - JOIN THE ELITE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:white;font-family:Arial, sans-serif;padding:20px}
+h1{font-size:48px;font-weight:900;line-height:0.9;margin-bottom:15px}
+h1 span{color:#a855f7}
+p.desc{color:#b5b5b5;margin-bottom:25px;line-height:1.5;font-size:16px}
+.features{margin-bottom:25px}
+.features div{margin-bottom:10px;color:#ddd;font-size:15px}
+.stats{color:#888;font-size:11px;letter-spacing:1px;margin-bottom:30px;line-height:1.6}
+.form-box{background:#ffffff;border-radius:20px;padding:25px;color:#111;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+.form-box input{width:48%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;color:#000;font-size:14px;background:#f5f5f5;outline:none}
+.form-box input:focus{border-color:#a855f7;background:#fff}
+@media(max-width:600px){.form-box input{width:100%}}
+.form-box input::placeholder{color:#777}
+h3{margin:20px 0 10px 0;font-size:12px;letter-spacing:1px;color:#111}
+.challenge{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:15px;margin-bottom:10px;display:flex;flex-direction:column;gap:4px}
+.challenge b{display:block;color:#111;font-size:15px}
+.challenge span{font-size:13px;color:#666}
+.btn{width:100%;background:#111;color:white;padding:16px;border:none;border-radius:12px;font-weight:700;margin-top:20px;cursor:pointer;letter-spacing:0.5px}
+.btn:hover{background:#a855f7}
+</style>
+</head>
+<body>
+<h1>JOIN THE<br><span>ELITE.</span></h1>
+<p class="desc">Excoders Elite is not a course. It's a battlefield for the best. Register to get access to challenges.</p>
+
+<div class="features">
+<div>⚡ Weekly Challenges</div>
+<div>🏆 Win Prizes & Ranks</div>
+<div>💬 Direct WhatsApp Access</div>
+</div>
+
+<div class="stats">ALREADY 1,200+ MEMBERS<br>Razer Gold Partners • Instant Access</div>
+
+<div class="form-box">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="text" id="whatsapp" placeholder="WhatsApp No" required>
+<input type="email" id="email" placeholder="Email Address" required style="width:100%">
+
+<h3>CHOOSE YOUR CHALLENGE PREFERENCES</h3>
+
+<div class="challenge"><b>💻 Code Rush</b><span>Frontend / Backend Battles</span></div>
+<div class="challenge"><b>🎨 Design Duel</b><span>UI / Graphics Face-off</span></div>
+<div class="challenge"><b>🛡️ Cyber Hunt</b><span>CTF & Security</span></div>
+<div class="challenge"><b>✍️ Content Clash</b><span>Writing & Strategy</span></div>
+<div class="challenge"><b>🎬 Edit Wars</b><span>Video & Motion</span></div>
+<div class="challenge"><b>🧠 Logic Arena</b><span>Puzzles & Algorithms</span></div>
+
+<button class="btn" onclick="send()">REGISTER & ENTER BATTLEFIELD →</button>
+</div>
+
+<script>
+function send(){
+ var n=document.getElementById('name').value;
+ var w=document.getElementById('whatsapp').value;
+ var e=document.getElementById('email').value;
+ if(!n || !w || !e){alert('Please fill all fields');return}
+ var msg=`🔥 NEW ELITE REGISTRATION 🔥%0A%0AName: ${n}%0AWhatsApp: ${w}%0AEmail: ${e}%0A%0AI want to join Excoders Elite!`;
+ window.open(`https://wa.me/2349113257933?text=${msg}`, '_blank');
+ setTimeout(()=>{ window.location.href='main.html'; }, 1000);
+}
+</script>
+</body>
+</html>

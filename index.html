@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXCODERS ELITE - JOIN</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#08080c;color:white;font-family:Arial, sans-serif;padding:24px;max-width:500px;margin:0 auto}
+.warn{background:#ff0000;color:white;padding:12px;border-radius:10px;font-size:12px;font-weight:700;text-align:center;margin-bottom:20px;line-height:1.4;letter-spacing:0.3px}
+h1{font-size:50px;font-weight:900;line-height:0.9}
+h1 span{color:#a855f7}
+.desc{color:#999;margin:15px 0 25px 0;line-height:1.5}
+.list div{margin-bottom:8px;color:#ccc}
+.stats{color:#666;font-size:10px;letter-spacing:1.5px;margin:25px 0;line-height:1.8}
+.box{background:white;border-radius:22px;padding:22px;color:#111}
+.box input{width:100%;padding:15px;border-radius:12px;border:1px solid #ddd;background:#f2f2f2;color:#000;margin-bottom:12px;font-size:14px;outline:none}
+.box input:focus{background:white;border-color:#a855f7}
+.box input::placeholder{color:#888}
+.challenge{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:14px;margin-bottom:10px}
+.challenge b{color:#111;font-size:14px}
+.challenge span{color:#777;font-size:12px}
+.btn{width:100%;background:#111;color:white;padding:16px;border-radius:12px;border:none;font-weight:800;margin-top:15px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="warn">⚠️ BEWARE OF SCAM: No agent will EVER DM you to ask for money. Only official number is 09113257933. If anyone asks you for payment, it's SCAM!</div>
+
+<h1>JOIN THE<br><span>ELITE.</span></h1>
+<p class="desc">Excoders Elite is not a course. It's a battlefield for the best. Register to get access to challenges.</p>
+<div class="list"><div>⚡ Weekly Challenges</div><div>🏆 Win Prizes & Ranks</div><div>💬 Direct WhatsApp Access</div></div>
+<div class="stats">ALREADY 1,200+ MEMBERS<br>Razer Gold Partners • Instant Access</div>
+
+<div class="box">
+<input id="name" placeholder="Full Name">
+<input id="wa" placeholder="WhatsApp No">
+<input id="email" placeholder="Email Address">
+<h3 style="font-size:11px;letter-spacing:1px;margin:15px 0 10px 0">CHOOSE YOUR CHALLENGE PREFERENCES</h3>
+<div class="challenge"><b>💻 Code Rush</b><span>Frontend / Backend Battles</span></div>
+<div class="challenge"><b>🎨 Design Duel</b><span>UI / Graphics Face-off</span></div>
+<div class="challenge"><b>🛡️ Cyber Hunt</b><span>CTF & Security</span></div>
+<div class="challenge"><b>✍️ Content Clash</b><span>Writing & Strategy</span></div>
+<div class="challenge"><b>🎬 Edit Wars</b><span>Video & Motion</span></div>
+<div class="challenge"><b>🧠 Logic Arena</b><span>Puzzles & Algorithms</span></div>
+<button class="btn" onclick="go()">REGISTER & ENTER BATTLEFIELD →</button>
+<p style="text-align:center;font-size:10px;color:#888;margin-top:12px">🛡️ Official Only: 09113257933</p>
+</div>
+<script>
+function go(){
+let n=document.getElementById('name').value;
+let w=document.getElementById('wa').value;
+let e=document.getElementById('email').value;
+if(!n||!w||!e){alert('Fill all fields');return}
+let msg=`NEW ELITE JOIN%0AName: ${n}%0AWhatsApp: ${w}%0AEmail: ${e}`;
+window.open('https://wa.me/2349113257933?text='+msg,'_blank');
+setTimeout(()=>{location.href='main.html'},1000);
+}
+</script>
+</body>
+</html>

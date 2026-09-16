@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elite Tasks - Excoders Elite</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#07070a;color:#fff;font-family:Arial;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.stats{display:flex;gap:10px;margin-bottom:16px}
+.stat{flex:1;background:#12121a;border:1px solid #222;border-radius:14px;padding:12px;text-align:center}
+.stat b{font-size:18px;color:#a855f7;display:block}.stat span{font-size:10px;color:#777}
+.card{background:#12121a;border:1px solid #222;border-radius:16px;padding:16px;margin-bottom:12px}
+.card h3{font-size:14px}.card p{font-size:11px;color:#888;margin:6px 0}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;margin-top:10px;cursor:pointer}
+.btn-go{background:#fff;color:#000}.btn-done{background:#1a2a1a;color:#4ade80;border:1px solid #2a4a2a}
+.input{width:100%;padding:11px;background:#0e0e14;border:1px solid #333;border-radius:8px;color:#fff;margin-top:8px}
+.click-area{height:90px;background:#0e0e14;border:1px dashed #a855f7;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-top:10px;font-weight:900;cursor:pointer;user-select:none}
+.q{margin:8px 0;padding:8px;background:#0e0e14;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="top"><b>EXCODERS <span style="color:#a855f7">ELITE.</span></b><span style="font-size:10px;color:#4ade80">● VERIFIED $5</span></div>
+
+<div class="stats">
+<div class="stat"><b id="pts">0</b><span>POINTS</span></div>
+<div class="stat"><b id="streak">0🔥</b><span>DAY STREAK</span></div>
+<div class="stat"><b id="lvl">LVL 1</b><span>ELITE RANK</span></div>
+</div>
+
+<div class="card" id="dailyCard">
+<h3>📅 Daily Login</h3>
+<p>Come back everyday to keep streak. +50 points today</p>
+<button class="btn btn-go" id="dailyBtn" onclick="claimDaily()">Claim Daily +50 →</button>
+</div>
+
+<div class="card">
+<h3>⚡ Task 1: Speed Test - Click Frenzy</h3>
+<p>Click as fast as you can in 5 seconds. Need 25 clicks to pass. Even my grandma fit do am.</p>
+<div class="click-area" id="clickArea" onclick="clickTest()">TAP TO START</div>
+<p id="clickInfo" style="text-align:center;margin-top:8px;font-size:12px"></p>
+<button class="btn btn-go" id="btn1" onclick="startSpeed()">Start 5s Test →</button>
+</div>
+
+<div class="card">
+<h3>🧮 Task 2: Programming Calculation (No coding needed)</h3>
+<p>Just basic maths like computer dey do. Answer 3/3 to pass.</p>
+<div class="q">Q1: If <b>data = 5</b>, computer does <b>data * 2 + 3</b>. What is answer? <input class="input" id="q1" placeholder="Your answer"></div>
+<div class="q">Q2: You have <b>100</b> points, you spend <b>30</b>, then you double it. How much left? <input class="input" id="q2" placeholder="Your answer"></div>
+<div class="q">Q3: App has 10 users, everyday e double. After 2 days, how many users? <input class="input" id="q3" placeholder="Your answer"></div>
+<button class="btn btn-go" id="btn2" onclick="checkCalc()">Submit Answers →</button>
+<p id="calcInfo" style="font-size:11px;margin-top:6px"></p>
+</div>
+
+<div class="card">
+<h3>🕵️ Task 3: Decode The Elite Code (My own)</h3>
+<p>Secret message: <b>12-15-22-5 13-5</b> . Each number = letter (A=1). What e mean? Hint: Excoders motto</p>
+<input class="input" id="codeAns" placeholder="Type decoded message... e.g LOVE ME">
+<button class="btn btn-go" id="btn3" onclick="checkCode()">Decode →</button>
+<p id="codeInfo" style="font-size:11px;margin-top:6px"></p>
+</div>
+
+<div class="card" style="text-align:center">
+<h3 id="finalMsg">Complete 4 tasks to unlock Final Reward</h3>
+<button class="btn btn-go" id="finalBtn" onclick="finalClaim()" style="opacity:0.5" disabled>🔒 Locked - Complete All</button>
+</div>
+
+<script>
+let points = parseInt(localStorage.getItem('elite_pts')||0);
+let streak = parseInt(localStorage.getItem('elite_streak')||0);
+let lastDaily = localStorage.getItem('elite_last');
+let completed = JSON.parse(localStorage.getItem('elite_done')||'[]');
+
+function updateUI(){
+ document.getElementById('pts').innerText=points;
+ document.getElementById('streak').innerText=streak+'🔥';
+ document.getElementById('lvl').innerText='LVL '+(1+Math.floor(points/100));
+ if(completed.includes('daily')){document.getElementById('dailyBtn').innerText='✅ Claimed Today';document.getElementById('dailyBtn').className='btn btn-done'}
+ if(completed.includes('speed')){document.getElementById('btn1').innerText='✅ Completed +100 pts';document.getElementById('btn1').className='btn btn-done'}
+ if(completed.includes('calc')){document.getElementById('btn2').innerText='✅ Completed +150 pts';document.getElementById('btn2').className='btn btn-done'}
+ if(completed.includes('code')){document.getElementById('btn3').innerText='✅ Completed +150 pts';document.getElementById('btn3').className='btn btn-done'}
+ if(completed.length>=4){let b=document.getElementById('finalBtn');b.disabled=false;b.style.opacity=1;b.innerText='CLAIM ELITE BADGE - 500 PTS →';document.getElementById('finalMsg').innerText='🔥 All tasks done! Claim reward';}
+}
+function save(){localStorage.setItem('elite_pts',points);localStorage.setItem('elite_streak',streak);localStorage.setItem('elite_done',JSON.stringify(completed));updateUI()}
+
+function claimDaily(){
+ let today=new Date().toDateString();
+ if(lastDaily===today){alert('You don claim today, come back tomorrow');return}
+ if(lastDaily!==today){let y=new Date();y.setDate(y.getDate()-1);if(lastDaily===y.toDateString()){streak++}else if(!lastDaily){streak=1}else if(lastDaily!==today){streak=1}}
+ lastDaily=today;localStorage.setItem('elite_last',today);
+ if(!completed.includes('daily')){points+=50;completed.push('daily');}
+ save(); alert('Daily claimed! +50 pts Streak: '+streak);
+}
+
+// Speed Test
+let clicks=0, running=false, timer;
+function startSpeed(){
+ clicks=0;running=true;
+ document.getElementById('clickArea').innerText='CLICK NOW!!! 0';
+ document.getElementById('clickInfo').innerText='Go go go!';
+ setTimeout(()=>{running=false;let info=document.getElementById('clickInfo');
+ if(clicks>=25){info.innerText='✅ Passed! '+clicks+' clicks';if(!completed.includes('speed')){points+=100;completed.push('speed');save()}}else{info.innerText='❌ Failed: '+clicks+' clicks, need 25. Try again';}
+ },5000);
+}
+function clickTest(){if(!running)return;clicks++;document.getElementById('clickArea').innerText=clicks+' CLICKS';}
+
+function checkCalc(){
+ let a1=document.getElementById('q1').value.trim();
+ let a2=document.getElementById('q2').value.trim();
+ let a3=document.getElementById('q3').value.trim();
+ let score=0;
+ if(a1=='13')score++; if(a2=='140')score++; if(a3=='40')score++;
+ if(score>=2){
+  document.getElementById('calcInfo').innerText='✅ Correct! You get '+score+'/3';
+  if(!completed.includes('calc')){points+=150;completed.push('calc');save()}
+ }else{document.getElementById('calcInfo').innerText='❌ You get '+score+'/3, need 2. Answers: 13, 140, 40';}
+}
+
+function checkCode(){
+ let ans=document.getElementById('codeAns').value.toLowerCase().trim();
+ if(ans.includes('love me')||ans.includes('love')){
+  document.getElementById('codeInfo').innerText='✅ Correct! LOVE ME - You decoded am!';
+  if(!completed.includes('code')){points+=150;completed.push('code');save()}
+ }else{document.getElementById('codeInfo').innerText='❌ Wrong. Hint: 12=L, 15=O, 22=V, 5=E';}
+}
+
+function finalClaim(){
+ if(completed.length<4){alert('Complete all first');return}
+ points+=500;save();
+ alert('🔥 CONGRATS! You are now CERTIFIED ELITE. Total points: '+points+'\nScreenshot and send to +2349113257933 to get your Elite Role!');
+ window.open(`https://wa.me/2349113257933?text=🔥 I completed Elite Tasks! Points: ${points} Streak: ${streak} Give me my Elite Badge!`,'_blank');
+}
+updateUI();
+let today=new Date().toDateString(); if(localStorage.getItem('elite_last')!==today){document.getElementById('dailyBtn').innerText='Claim Daily +50 🔥';}
+</script>
+</body>
+</html>
